@@ -8,6 +8,7 @@ djangorestframework = "*"
 "psycopg2" = "*"
 django = "*"
 dj-database-url = "*"
+jsonschema = "*"
 
 [dev-packages]
 "flake8" = "*"

@@ -2,6 +2,7 @@ from django.db import models
 
 from django.contrib.postgres.fields import JSONField
 
+
 class Registration(models.Model):
     class Meta:
         db_table = "registration"
