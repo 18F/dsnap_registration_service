@@ -12,3 +12,13 @@ class RegistrationSerializer(serializers.ModelSerializer):
         on creation
         """
         return Registration.objects.create(original_data=validated_data['latest_data'], **validated_data)
+
+    def to_internal_value(self, data):
+        """
+        Eliminate the need to have POST and other submissions to have the
+        actual data under a "latest_data" key by ensuring it on deserialization
+        """
+        new_data = {
+            "latest_data": data
+        }
+        return super().to_internal_value(new_data)
