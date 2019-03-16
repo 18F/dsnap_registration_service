@@ -9,9 +9,12 @@ djangorestframework = "*"
 django = "*"
 dj-database-url = "*"
 jsonschema = "*"
+pytest = "*"
+pytest-django = "*"
+pytest-cov = "*"
 
 [dev-packages]
 "flake8" = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.6"

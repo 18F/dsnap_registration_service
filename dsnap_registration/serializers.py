@@ -127,7 +127,11 @@ SCHEMA = {
                 "additionalProperties": False
             }
         }
-    }
+    },
+    "required": [
+        "disaster_id",
+    ],
+    "additionalProperties": False
 }
 
 
@@ -155,7 +159,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
         return super().to_internal_value(new_data)
 
     def validate(self, data):
-        errors = ["{}: {}".format(e.message, e.schema_path) for e in
+        errors = [e.message for e in
                   Draft7Validator(SCHEMA).iter_errors(data['latest_data'])]
         if errors:
             raise serializers.ValidationError(f"Validation failed: {errors}")
