@@ -1,6 +1,7 @@
-from rest_framework import serializers
-from .models import Registration
 from jsonschema import Draft7Validator
+from rest_framework import serializers
+
+from .models import Registration
 
 SCHEMA = {
     "$schema": "http://json-schema.org/draft-07/schema#",
