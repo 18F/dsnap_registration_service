@@ -1,4 +1,5 @@
 # dsnap_registration_service
+[![CircleCI](https://circleci.com/gh/18F/dsnap_registration_service.svg?style=svg)](https://circleci.com/gh/18F/dsnap_registration_service)
 
 ## Why this project
 
