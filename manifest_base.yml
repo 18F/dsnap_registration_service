@@ -1,8 +1,0 @@
----
-stack: cflinuxfs2
-buildpack: python_buildpack
-applications:
-- name: web
-services:
-- database  # aws-rds medium-psql
-- credentials  # ups with keys: "my"

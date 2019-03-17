@@ -1,0 +1,11 @@
+---
+applications:
+- name: dsnap_registration_service
+  buildpack: python_buildpack
+  memory: 512M
+  routes:
+    - route: dsnap-registration-service-demo.app.cloud.gov
+  services:
+    - dsnap-registration-db
+  env:
+    DJANGO_SETTINGS_MODULE: dsnap_registration_service.settings.cloud
