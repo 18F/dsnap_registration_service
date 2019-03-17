@@ -12,6 +12,8 @@ jsonschema = "*"
 pytest = "*"
 pytest-django = "*"
 pytest-cov = "*"
+gunicorn = "*"
+gevent = "*"
 
 [dev-packages]
 "flake8" = "*"

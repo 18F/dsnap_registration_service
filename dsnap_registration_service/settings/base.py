@@ -27,7 +27,10 @@ SECRET_KEY = 'ymca179idqnbrz3ke%4h-c$$st$wb--*3#-ok@m65^!a5llq41'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '.app.cloud.gov'
+]
 
 
 # Application definition
