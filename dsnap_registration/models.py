@@ -10,6 +10,3 @@ class Registration(models.Model):
     modified_date = models.DateField(null=False, auto_now=True, editable=False)
     original_data = JSONField(editable=False)
     latest_data = JSONField()
-
-    def __str__(self):
-        return self.original_data['county']
