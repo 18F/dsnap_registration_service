@@ -1,0 +1,106 @@
+{
+    "preferred_language": "English",
+    "phone": "2165551212",
+    "email": "joe@email.biz",
+    "residential_address": {
+        "street1": "101 Main St",
+        "street2": "",
+        "city": "Oakland",
+        "state": "CA",
+        "zipcode": "94612"
+    },
+    "mailing_address": {
+        "street1": "202 Elm Rd",
+        "street2": "",
+        "city": "Cleveland",
+        "state": "OH",
+        "zipcode": "44121"
+    },
+    "county": "Alameda",
+    "state_id": "A123456",
+    "household": [
+        {
+            "first_name": "Joe",
+            "middle_name": "",
+            "last_name": "Blow",
+            "dob": "1972-04-20",
+            "sex": "male",
+            "ssn": "111111111",
+            "race": "",
+            "has_food_assistance": false,
+            "income": {
+                "self_employed": null,
+                "unemployment": 200,
+                "cash_assistance": null,
+                "disability": null,
+                "social_security": null,
+                "veterans_benefits": null,
+                "alimony": null,
+                "child_support": null,
+                "fema": null,
+                "other_sources": null
+            },
+            "jobs": [
+                {
+                    "employer_name": "Acme",
+                    "pay": 1000,
+                    "is_state_agency": false
+                },
+                {
+                    "employer_name": "Apollo",
+                    "pay": 500,
+                    "is_state_agency": false
+                }
+            ],
+            "money_on_hand": "1000"
+        },
+        {
+            "first_name": "Jane",
+            "middle_name": "",
+            "last_name": "Jones",
+            "dob": "1980-01-01",
+            "sex": "female",
+            "ssn": "111111112",
+            "race": "",
+            "has_food_assistance": false,
+            "income": {
+                "self_employed": 10000,
+                "unemployment": null,
+                "cash_assistance": null,
+                "disability": null,
+                "social_security": null,
+                "veterans_benefits": null,
+                "alimony": null,
+                "child_support": null,
+                "fema": null,
+                "other_sources": null
+            },
+            "jobs": [
+                {
+                    "employer_name": "USPS",
+                    "pay": 10000,
+                    "is_state_agency": false
+                }
+            ],
+            "money_on_hand": 5
+        }
+    ],
+    "has_lost_or_inaccessible_income": true,
+    "has_inaccessible_liquid_resources": false,
+    "purchased_or_plans_to_purchase_food": true,
+    "disaster_expenses": {
+        "storage_expenses": 200,
+        "disaster_damaged_vehicle_expenses": null,
+        "clean_up_items_expenses": 1000,
+        "fuel_for_primary_heating_source": null,
+        "expenses_related_to_replacing_items": null,
+        "disaster_related_pet_boarding_fees": 45,
+        "disaster_related_funeral_expenses": null,
+        "personal_injury_medical": null,
+        "home_or_business_repairs": null,
+        "food_loss": null,
+        "evacuation_expenses": null,
+        "temporary_shelter_expenses": null,
+        "home_or_business_property_protection": null
+    }
+}
