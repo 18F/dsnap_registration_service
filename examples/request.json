@@ -90,18 +90,10 @@
     "has_inaccessible_liquid_resources": false,
     "purchased_or_plans_to_purchase_food": true,
     "disaster_expenses": {
-        "storage_expenses": 200,
-        "disaster_damaged_vehicle_expenses": null,
-        "clean_up_items_expenses": 1000,
-        "fuel_for_primary_heating_source": null,
-        "expenses_related_to_replacing_items": null,
-        "disaster_related_pet_boarding_fees": 45,
-        "disaster_related_funeral_expenses": null,
-        "personal_injury_medical": null,
-        "home_or_business_repairs": null,
+        "home_or_business_repairs": 200,
         "food_loss": null,
         "evacuation_expenses": null,
         "temporary_shelter_expenses": null,
-        "home_or_business_property_protection": null
+        "other": 25
     }
 }

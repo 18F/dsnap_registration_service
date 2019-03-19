@@ -50,23 +50,7 @@ SCHEMA = {
                     "$ref": "#/definitions/nonzero_money"},
                 "evacuation_expenses": {
                     "$ref": "#/definitions/nonzero_money"},
-                "home_or_business_property_protection": {
-                    "$ref": "#/definitions/nonzero_money"},
-                "personal_injury_medical": {
-                    "$ref": "#/definitions/nonzero_money"},
-                "disaster_related_funeral_expenses": {
-                    "$ref": "#/definitions/nonzero_money"},
-                "disaster_related_pet_boarding_fees": {
-                    "$ref": "#/definitions/nonzero_money"},
-                "expenses_related_to_replacing_items": {
-                    "$ref": "#/definitions/nonzero_money"},
-                "fuel_for_primary_heating_source": {
-                    "$ref": "#/definitions/nonzero_money"},
-                "clean_up_items_expenses": {
-                    "$ref": "#/definitions/nonzero_money"},
-                "disaster_damaged_vehicle_expenses": {
-                    "$ref": "#/definitions/nonzero_money"},
-                "storage_expenses": {
+                "other": {
                     "$ref": "#/definitions/nonzero_money"},
             },
             "additionalProperties": False
