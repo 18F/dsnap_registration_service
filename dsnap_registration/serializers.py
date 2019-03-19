@@ -88,8 +88,6 @@ SCHEMA = {
                                 "$ref": "#/definitions/nonzero_money"},
                             "child_support": {
                                 "$ref": "#/definitions/nonzero_money"},
-                            "fema": {
-                                "$ref": "#/definitions/nonzero_money"},
                             "other_sources": {
                                 "$ref": "#/definitions/nonzero_money"}
                         },
