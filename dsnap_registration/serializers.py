@@ -100,7 +100,7 @@ SCHEMA = {
                             "properties": {
                                 "employer_name": {"type": "string"},
                                 "pay": {"$ref": "#/definitions/nonzero_money"},
-                                "is_state_agency": {"type": "boolean"}
+                                "is_dsnap_agency": {"type": "boolean"}
                             },
                             "additionalProperties": False
                          }

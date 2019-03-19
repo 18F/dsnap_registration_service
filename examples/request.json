@@ -44,12 +44,12 @@
                 {
                     "employer_name": "Acme",
                     "pay": 1000,
-                    "is_state_agency": false
+                    "is_dsnap_agency": false
                 },
                 {
                     "employer_name": "Apollo",
                     "pay": 500,
-                    "is_state_agency": false
+                    "is_dsnap_agency": false
                 }
             ],
             "money_on_hand": 1000
@@ -78,7 +78,7 @@
                 {
                     "employer_name": "USPS",
                     "pay": 10000,
-                    "is_state_agency": false
+                    "is_dsnap_agency": false
                 }
             ],
             "money_on_hand": 5
