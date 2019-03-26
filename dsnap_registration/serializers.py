@@ -30,7 +30,7 @@ SCHEMA = {
     "properties": {
         "disaster_id": {"type": "number", "minimum": 0},
         "preferred_language": {"type": "string"},
-        "phone": {"type": "string"},
+        "phone": {"type": "string", "pattern": r"^\d{10}$"},
         "email": {"type": "string"},
         "residential_address": {"$ref": "#/definitions/address"},
         "mailing_address": {"$ref": "#/definitions/address"},
@@ -65,7 +65,7 @@ SCHEMA = {
                     "last_name": {"type": "string"},
                     "dob": {"type": "string"},
                     "sex": {"type": "string"},
-                    "ssn": {"type": "string"},
+                    "ssn": {"type": "string", "pattern": r"^\d{9}$"},
                     "race": {"type": "string"},
                     "has_food_assistance": {"type": "boolean"},
                     "money_on_hand": {"$ref": "#/definitions/nonzero_money"},

@@ -23,6 +23,18 @@ GOOD_PAYLOAD = {
         "zipcode": "44121"
     },
     "county": "Alameda",
+    "household": [
+        {
+            "first_name": "John",
+            "last_name": "Doe",
+            "ssn": "123456789"
+        },
+        {
+            "first_name": "Jane",
+            "last_name": "Doe",
+            "ssn": "223456789"
+        },
+    ]
 }
 
 
