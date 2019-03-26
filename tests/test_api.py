@@ -27,12 +27,18 @@ GOOD_PAYLOAD = {
         {
             "first_name": "John",
             "last_name": "Doe",
-            "ssn": "123456789"
+            "ssn": "123456789",
+            "sex": "male",
+            "race": None,
+            "ethnicity": "Hispanic or Latino"
         },
         {
             "first_name": "Jane",
             "last_name": "Doe",
-            "ssn": "223456789"
+            "ssn": "223456789",
+            "sex": "female",
+            "race": "White",
+            "ethnicity": "Not Hispanic or Latino"
         },
     ]
 }
