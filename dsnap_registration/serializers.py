@@ -64,7 +64,7 @@ SCHEMA = {
                     "middle_name": {"type": "string"},
                     "last_name": {"type": "string"},
                     "dob": {"type": "string"},
-                    "sex": {"enum": ["male", "female", None]},
+                    "sex": {"enum": ["male", "female", ""]},
                     "ssn": {"type": "string", "pattern": r"^\d{9}$"},
                     "race": {
                         "enum": [
@@ -73,14 +73,14 @@ SCHEMA = {
                             "Black or African American",
                             "Native Hawaiian or Other Pacific Islander",
                             "White",
-                            None
+                            ""
                         ]
                     },
                     "ethnicity": {
                         "enum": [
                             "Hispanic or Latino",
                             "Not Hispanic or Latino",
-                            None
+                            ""
                         ]
                     },
                     "has_food_assistance": {"type": "boolean"},
