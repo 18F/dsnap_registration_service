@@ -29,7 +29,7 @@ GOOD_PAYLOAD = {
             "last_name": "Doe",
             "ssn": "123456789",
             "sex": "male",
-            "race": None,
+            "race": "",
             "ethnicity": "Hispanic or Latino"
         },
         {
