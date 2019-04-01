@@ -65,7 +65,12 @@ SCHEMA = {
                     "last_name": {"type": "string"},
                     "dob": {"type": "string"},
                     "sex": {"enum": ["male", "female", ""]},
-                    "ssn": {"type": "string", "pattern": r"^\d{9}$"},
+                    "ssn": {
+                        "anyOf": [
+                            {"type": "string", "pattern": r"^\d{9}$"},
+                            {"type": "null"},
+                        ]
+                    },
                     "race": {
                         "enum": [
                             "American Indian or Alaskan Native",
