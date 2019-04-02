@@ -15,7 +15,6 @@ class RegistrationList(generics.ListCreateAPIView):
         queryset = Registration.objects.all()
 
         search_filters = self.get_search_filters()
-        print(search_filters)
         queryset = queryset.filter(**search_filters)
 
         return queryset
