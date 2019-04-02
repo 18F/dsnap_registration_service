@@ -68,8 +68,8 @@ This will make the application available at `http://localhost:8000`, by default.
 
 | URL               | Verb     | Description
 |-------------------|----------|--------------------|
-| /registrations    | POST     | The endpoint for submitting new registrations to be persisted. Returns the id of the new registration |
-| /registrations    | GET      | Returns saved registrations |
-| /registrations/id | GET      | Returns the specified registration |
-| /registrations/id | PUT      | Updates the specified registration |
-| /registrations/id | DELETE   | Deletes the specified registration |
+| /registrations    | POST     | The endpoint for submitting new registrations to be persisted. Returns the id of the new registration                        |
+| /registrations    | GET      | Returns saved registrations. Also, allows query string params state_id, registrant_ssn, registrant_dob, registrant_last_name |
+| /registrations/id | GET      | Returns the specified registration                                                                                           |
+| /registrations/id | PUT      | Updates the specified registration                                                                                           |
+| /registrations/id | DELETE   | Deletes the specified registration                                                                                           |

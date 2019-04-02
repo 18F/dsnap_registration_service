@@ -8,6 +8,7 @@ GOOD_PAYLOAD = {
     "preferred_language": "English",
     "phone": "2165555555",
     "email": "adam@email.biz",
+    "state_id": "ABC9876",
     "residential_address": {
         "street1": "250 Oakland Way",
         "street2": "",
@@ -101,8 +102,73 @@ def test_lifecycle(client):
     assert result["latest_data"]["preferred_language"] == "Spanish"
 
     response = client.delete(f'/registrations/{registration_id}',
-                          content_type="application/json")
+                             content_type="application/json")
     assert response.status_code == status.HTTP_204_NO_CONTENT
     response = client.get(f'/registrations/{registration_id}',
                           content_type="application/json")
     assert response.status_code == status.HTTP_404_NOT_FOUND
+
+
+@pytest.mark.django_db
+def test_search_by_registrant_ssn(client, payload1):
+    search_url = '/registrations?registrant_ssn={}'.format(
+        payload1['household'][0]['ssn'])
+    response = client.get(search_url)
+    result = response.json()
+    assert len(result) == 1
+    assert result[0]["original_data"] == payload1
+
+
+@pytest.mark.django_db
+def test_search_by_state_id(client, payload1):
+    search_url = '/registrations?state_id={}'.format(payload1['state_id'])
+    response = client.get(search_url)
+    result = response.json()
+    assert len(result) == 1
+    assert result[0]["original_data"] == payload1
+
+
+@pytest.mark.django_db
+def test_search_by_non_registrant_ssn(client, payload1):
+    search_url = '/registrations?registrant_ssn={}'.format(
+        payload1['household'][1]['ssn'])
+    response = client.get(search_url)
+    result = response.json()
+    assert len(result) == 0
+
+
+@pytest.mark.django_db
+def test_search_by_registrant_last_name(client, payload1, payload2):
+    search_url = '/registrations?registrant_last_name={}'.format("Doe")
+    response = client.get(search_url)
+    result = response.json()
+    assert len(result) == 2
+
+
+@pytest.mark.django_db
+def test_search_by_registrant_last_name_and_registrant_ssn(
+        client, payload1, payload2):
+    search_url = '/registrations?registrant_last_name={}&state_id={}'.format(
+        "Doe", payload1["state_id"])
+    response = client.get(search_url)
+    result = response.json()
+    assert len(result) == 1
+
+
+@pytest.fixture
+def payload1(client):
+    payload1 = copy.deepcopy(GOOD_PAYLOAD)
+    client.post('/registrations', data=payload1,
+                content_type="application/json")
+    return payload1
+
+
+@pytest.fixture
+def payload2(client):
+    payload2 = copy.deepcopy(GOOD_PAYLOAD)
+    payload2["state_id"] = "ZZ987654321"
+    payload2["household"][0]["ssn"] = "987654321"
+    del payload2["household"][1]
+    client.post('/registrations', data=payload2,
+                content_type="application/json")
+    return payload2
