@@ -131,4 +131,5 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.JSONParser',
     ),
     'NON_FIELD_ERRORS_KEY': 'Invalid request',
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
 }
