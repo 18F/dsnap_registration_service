@@ -9,6 +9,7 @@ GOOD_PAYLOAD = {
     "phone": "2165555555",
     "email": "adam@email.biz",
     "state_id": "ABC9876",
+    "money_on_hand": 100,
     "residential_address": {
         "street1": "250 Oakland Way",
         "street2": "",
