@@ -30,6 +30,7 @@ SCHEMA = {
     "properties": {
         "disaster_id": {"type": "number", "minimum": 0},
         "preferred_language": {"enum": ["en", "es"]},
+        "money_on_hand": {"$ref": "#/definitions/nonzero_money"},
         "phone": {
             "anyOf": [
                 {"type": "string", "pattern": r"^\d{10}$"},
@@ -94,7 +95,6 @@ SCHEMA = {
                         ]
                     },
                     "has_food_assistance": {"type": "boolean"},
-                    "money_on_hand": {"$ref": "#/definitions/nonzero_money"},
                     "income": {
                         "type": "object",
                         "properties": {
