@@ -29,8 +29,13 @@ SCHEMA = {
 
     "properties": {
         "disaster_id": {"type": "number", "minimum": 0},
-        "preferred_language": {"type": "string"},
-        "phone": {"type": "string", "pattern": r"^\d{10}$"},
+        "preferred_language": {"enum": ["en", "es"]},
+        "phone": {
+            "anyOf": [
+                {"type": "string", "pattern": r"^\d{10}$"},
+                {"type": "null"},
+            ]
+        },
         "email": {"type": "string"},
         "residential_address": {"$ref": "#/definitions/address"},
         "mailing_address": {"$ref": "#/definitions/address"},
