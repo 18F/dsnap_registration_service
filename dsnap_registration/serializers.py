@@ -29,7 +29,7 @@ SCHEMA = {
 
     "properties": {
         "disaster_id": {"type": "number", "minimum": 0},
-        "preferred_language": {"type": "string"},
+        "preferred_language": {"enum": ["en", "es"]},
         "phone": {
             "anyOf": [
                 {"type": "string", "pattern": r"^\d{10}$"},

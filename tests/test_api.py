@@ -5,7 +5,7 @@ from rest_framework import status
 
 GOOD_PAYLOAD = {
     "disaster_id": 34,
-    "preferred_language": "English",
+    "preferred_language": "en",
     "phone": "2165555555",
     "email": "adam@email.biz",
     "state_id": "ABC9876",
@@ -93,13 +93,13 @@ def test_lifecycle(client):
     result = response.json()
     assert result["original_data"] == result["latest_data"]
 
-    payload["preferred_language"] = "Spanish"
+    payload["preferred_language"] = "es"
     response = client.put(f'/registrations/{registration_id}', data=payload,
                           content_type="application/json")
     assert response.status_code == status.HTTP_200_OK
     result = response.json()
-    assert result["original_data"]["preferred_language"] == "English"
-    assert result["latest_data"]["preferred_language"] == "Spanish"
+    assert result["original_data"]["preferred_language"] == "en"
+    assert result["latest_data"]["preferred_language"] == "es"
 
     response = client.delete(f'/registrations/{registration_id}',
                              content_type="application/json")
