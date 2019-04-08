@@ -62,7 +62,7 @@ def test_missing_required_field(client):
 
 def test_extra_field(client):
     payload = copy.deepcopy(GOOD_PAYLOAD)
-    payload["EXTRA_FIELD"] = "Some extra valie"
+    payload["EXTRA_FIELD"] = "Some extra value"
 
     response = client.post('/registrations', data=payload,
                            content_type="application/json")
@@ -70,7 +70,9 @@ def test_extra_field(client):
     assert response.status_code == status.HTTP_400_BAD_REQUEST
     assert response.json() == {
         "Invalid request":
-            ["""Validation failed: ["Additional properties are not allowed (\'EXTRA_FIELD\' was unexpected)"]"""]
+            ['Validation failed: '
+             '["Additional properties are not allowed '
+             '(\'EXTRA_FIELD\' was unexpected)"]']
     }
 
 
