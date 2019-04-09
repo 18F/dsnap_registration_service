@@ -15,6 +15,7 @@ pytest-cov = "*"
 gunicorn = "*"
 gevent = "*"
 django-cors-headers = "*"
+whitenoise = "*"
 
 [dev-packages]
 "flake8" = "*"

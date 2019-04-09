@@ -12,3 +12,5 @@ DEBUG = True
 if not DATABASES['default']:
     DATABASES['default'] = dj_database_url.parse(
         'postgres:///dsnap_registration', conn_max_age=600)
+
+WHITENOISE_AUTOREFRESH = True
