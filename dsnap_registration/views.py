@@ -35,3 +35,6 @@ class RegistrationList(generics.ListCreateAPIView):
 class RegistrationDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Registration.objects.all()
     serializer_class = RegistrationSerializer
+
+    def perform_update(self, serializer):
+        serializer.save(modified_by=self.request.user)
