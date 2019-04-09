@@ -1,10 +1,17 @@
 from rest_framework import generics
+from rest_framework.permissions import (SAFE_METHODS, BasePermission,
+                                        IsAuthenticated)
 
 from .models import Registration
 from .serializers import RegistrationSerializer
 
 REGISTRATION_SEARCH_PARAMS = ('state_id',)
 REGISTRANT_SEARCH_PARAMS = ('ssn', 'dob', 'last_name',)
+
+
+class ReadOnly(BasePermission):
+    def has_permission(self, request, view):
+        return request.method in SAFE_METHODS
 
 
 class RegistrationList(generics.ListCreateAPIView):
@@ -33,6 +40,7 @@ class RegistrationList(generics.ListCreateAPIView):
 
 
 class RegistrationDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticated | ReadOnly,)
     queryset = Registration.objects.all()
     serializer_class = RegistrationSerializer
 

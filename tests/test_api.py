@@ -1,6 +1,7 @@
 import copy
 
 import pytest
+from django.contrib.auth import get_user_model
 from rest_framework import status
 
 GOOD_PAYLOAD = {
@@ -78,7 +79,7 @@ def test_extra_field(client):
 
 
 @pytest.mark.django_db
-def test_lifecycle(client):
+def test_lifecycle_without_authentication(client):
     payload = copy.deepcopy(GOOD_PAYLOAD)
 
     response = client.post('/registrations', data=payload,
@@ -100,7 +101,42 @@ def test_lifecycle(client):
     payload["preferred_language"] = "es"
     response = client.put(f'/registrations/{registration_id}', data=payload,
                           content_type="application/json")
+    assert response.status_code == status.HTTP_403_FORBIDDEN
+
+    response = client.delete(f'/registrations/{registration_id}',
+                             content_type="application/json")
+    assert response.status_code == status.HTTP_403_FORBIDDEN
+
+
+@pytest.mark.django_db
+def test_lifecycle_with_authentication(client):
+    payload = copy.deepcopy(GOOD_PAYLOAD)
+
+    response = client.post('/registrations', data=payload,
+                           content_type="application/json")
+    assert response.status_code == status.HTTP_201_CREATED
+    result = response.json()
+    assert "id" in result
+    assert "created_date" in result
+    assert "modified_date" in result
+    registration_id = result["id"]
+    assert result["original_data"] == result["latest_data"]
+
+    response = client.get(f'/registrations/{registration_id}',
+                          content_type="application/json")
     assert response.status_code == status.HTTP_200_OK
+    result = response.json()
+    assert result["original_data"] == result["latest_data"]
+
+    payload["preferred_language"] = "es"
+    test_user = get_user_model().objects.create_superuser(
+            username="admin",
+            password="adminadmin",
+            email="admin@example.com")
+    client.force_login(test_user)
+
+    response = client.put(f'/registrations/{registration_id}', data=payload,
+                          content_type="application/json")
     result = response.json()
     assert result["original_data"]["preferred_language"] == "en"
     assert result["latest_data"]["preferred_language"] == "es"
