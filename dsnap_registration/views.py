@@ -9,12 +9,13 @@ REGISTRATION_SEARCH_PARAMS = ('state_id',)
 REGISTRANT_SEARCH_PARAMS = ('ssn', 'dob', 'last_name',)
 
 
-class ReadOnly(BasePermission):
+class AnonymousPost(BasePermission):
     def has_permission(self, request, view):
-        return request.method in SAFE_METHODS
+        return request.method == 'POST'
 
 
 class RegistrationList(generics.ListCreateAPIView):
+    permission_classes = (IsAuthenticated | AnonymousPost,)
     serializer_class = RegistrationSerializer
 
     def get_queryset(self):
@@ -40,7 +41,7 @@ class RegistrationList(generics.ListCreateAPIView):
 
 
 class RegistrationDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (IsAuthenticated | ReadOnly,)
+    permission_classes = (IsAuthenticated,)
     queryset = Registration.objects.all()
     serializer_class = RegistrationSerializer
 
