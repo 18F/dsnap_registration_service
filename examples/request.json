@@ -1,6 +1,7 @@
 {
     "disaster_id": 34,
-    "preferred_language": "English",
+    "money_on_hand": 1000,
+    "preferred_language": "es",
     "phone": "2165551212",
     "email": "joe@email.biz",
     "residential_address": {
@@ -51,8 +52,7 @@
                     "pay": 500,
                     "is_dsnap_agency": false
                 }
-            ],
-            "money_on_hand": 1000
+            ]
         },
         {
             "first_name": "Jane",
@@ -80,8 +80,7 @@
                     "pay": 10000,
                     "is_dsnap_agency": false
                 }
-            ],
-            "money_on_hand": 5
+            ]
         }
     ],
     "has_lost_or_inaccessible_income": true,
