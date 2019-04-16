@@ -42,7 +42,8 @@ GOOD_PAYLOAD = {
             "race": "White",
             "ethnicity": "Not Hispanic or Latino"
         },
-    ]
+    ],
+    "ebt_card_number": None
 }
 
 
@@ -111,6 +112,23 @@ def test_lifecycle(client):
                           content_type="application/json")
     assert response.status_code == status.HTTP_404_NOT_FOUND
 
+
+@pytest.mark.django_db
+def test_ebt_accepted_on_put_but_null_on_post(client):
+    payload = copy.deepcopy(GOOD_PAYLOAD)
+    payload['ebt_card_number'] = '123456789'
+    response = client.post('/registrations', data=payload,
+                           content_type="application/json")
+    result = response.json()
+    assert result['original_data'] == result['latest_data']
+    assert result['original_data']['ebt_card_number'] is None
+
+    registration_id = result["id"]
+    response = client.put(f'/registrations/{registration_id}', data=payload,
+                          content_type="application/json")
+    result = response.json()
+    assert result['original_data']['ebt_card_number'] is None
+    assert result['latest_data']['ebt_card_number'] == payload['ebt_card_number']
 
 @pytest.mark.django_db
 def test_search_by_registrant_ssn(client, payload1):

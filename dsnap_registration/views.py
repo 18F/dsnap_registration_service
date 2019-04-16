@@ -3,7 +3,6 @@ from rest_framework import generics
 from .models import Registration
 from .serializers import RegistrationSerializer
 
-
 REGISTRATION_SEARCH_PARAMS = ('state_id',)
 REGISTRANT_SEARCH_PARAMS = ('ssn', 'dob', 'last_name',)
 
