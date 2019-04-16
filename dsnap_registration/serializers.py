@@ -134,7 +134,13 @@ SCHEMA = {
                 },
                 "additionalProperties": False
             }
-        }
+        },
+        "ebt_card_number": {
+            "anyOf": [
+                {"type": "string", "pattern": r"^\d*$"},
+                {"type": "null"},
+            ]
+        },
     },
     "required": [
         "disaster_id",
@@ -153,6 +159,9 @@ class RegistrationSerializer(serializers.ModelSerializer):
         Set original_data (which is set to be not editable) to the latest_data
         on creation
         """
+        # Force null on original creation
+        validated_data['latest_data']['ebt_card_number'] = None
+
         return Registration.objects.create(
             original_data=validated_data['latest_data'], **validated_data)
 
