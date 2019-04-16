@@ -85,8 +85,8 @@ def test_lifecycle(client):
     assert response.status_code == status.HTTP_201_CREATED
     result = response.json()
     assert "id" in result
-    assert "created_date" in result
-    assert "modified_date" in result
+    assert "created_at" in result
+    assert "modified_at" in result
     registration_id = result["id"]
     assert result["original_data"] == result["latest_data"]
 
