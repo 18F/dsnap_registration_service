@@ -1,3 +1,4 @@
+from django.utils import timezone
 from jsonschema import Draft7Validator
 from rest_framework import serializers
 
@@ -181,3 +182,17 @@ class RegistrationSerializer(serializers.ModelSerializer):
         if errors:
             raise serializers.ValidationError(f"Validation failed: {errors}")
         return data
+
+
+class RegistrationStatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Registration
+        fields = '__all__'
+
+    def update(self, instance, validated_data):
+        instance.rules_service_approved = validated_data['rules_service_approved']
+        instance.user_approved = validated_data['user_approved']
+        instance.approved_by = validated_data['approved_by']
+        instance.approved_at = timezone.now()
+        instance.save()
+        return instance
