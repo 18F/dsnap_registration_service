@@ -79,18 +79,14 @@ def test_extra_field(client):
 
 
 @pytest.mark.django_db
-def test_lifecycle_without_authentication(client):
+def test_authentication(client):
     payload = copy.deepcopy(GOOD_PAYLOAD)
 
     response = client.post('/registrations', data=payload,
                            content_type="application/json")
     assert response.status_code == status.HTTP_201_CREATED
     result = response.json()
-    assert "id" in result
-    assert "created_at" in result
-    assert "modified_at" in result
     registration_id = result["id"]
-    assert result["original_data"] == result["latest_data"]
 
     response = client.get(f'/registrations/{registration_id}',
                           content_type="application/json")
@@ -105,9 +101,13 @@ def test_lifecycle_without_authentication(client):
                              content_type="application/json")
     assert response.status_code == status.HTTP_403_FORBIDDEN
 
+    response = client.put(f'/registrations/{registration_id}/status',
+                             content_type="application/json")
+    assert response.status_code == status.HTTP_403_FORBIDDEN
+
 
 @pytest.mark.django_db
-def test_lifecycle_with_authentication(authenticated_client):
+def test_lifecycle(authenticated_client):
     payload = copy.deepcopy(GOOD_PAYLOAD)
 
     response = authenticated_client.post('/registrations', data=payload,
@@ -140,6 +140,34 @@ def test_lifecycle_with_authentication(authenticated_client):
                                         content_type="application/json")
     assert response.status_code == status.HTTP_404_NOT_FOUND
 
+
+@pytest.mark.django_db
+def test_status(authenticated_client):
+    payload = copy.deepcopy(GOOD_PAYLOAD)
+    status_payload = {
+        "rules_service_approved": True,
+        "user_approved": True
+    }
+
+    response = authenticated_client.post('/registrations', data=payload,
+                                         content_type="application/json")
+    assert response.status_code == status.HTTP_201_CREATED
+    result = response.json()
+    registration_id = result["id"]
+    response = authenticated_client.put(f'/registrations/{registration_id}/status',
+                                        content_type="application/json",
+                                        data=status_payload
+                                        )
+    assert response.status_code == status.HTTP_200_OK
+    result = response.json()
+    assert result["rules_service_approved"] == status_payload["rules_service_approved"]
+    assert result["user_approved"] == status_payload["user_approved"]
+
+    # Strangely, the result of the PUT has the `approved_by` set to the
+    # userid and not the username. A GET is needed for the username
+    response = authenticated_client.get(f'/registrations/{registration_id}')
+    result = response.json()
+    assert result["approved_by"] == "admin"
 
 @pytest.mark.django_db
 def test_ebt_accepted_on_put_but_null_on_post(authenticated_client):

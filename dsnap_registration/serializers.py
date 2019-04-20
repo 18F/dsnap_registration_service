@@ -151,6 +151,7 @@ SCHEMA = {
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
+    approved_by = serializers.ReadOnlyField(source='approved_by.username')
     class Meta:
         model = Registration
         fields = '__all__'
