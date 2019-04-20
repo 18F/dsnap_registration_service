@@ -12,7 +12,7 @@ class Registration(models.Model):
     created_at = models.DateTimeField(null=False, auto_now_add=True,
                                       editable=False)
     modified_by = models.ForeignKey('auth.User', null=True,
-                                    related_name='registrations',
+                                    related_name='+',
                                     on_delete=models.PROTECT)
     modified_at = models.DateTimeField(null=False, auto_now=True,
                                        editable=False)
