@@ -1,9 +1,10 @@
+from django.utils import timezone
 from jsonschema import Draft7Validator
 from rest_framework import serializers
 
 from .models import Registration
 
-SCHEMA = {
+REGISTRATION_SCHEMA = {
     "$schema": "http://json-schema.org/draft-07/schema#",
 
     "definitions": {
@@ -148,8 +149,24 @@ SCHEMA = {
     "additionalProperties": False
 }
 
+REGISTRATION_STATUS_SCHEMA = {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+
+    "type": "object",
+
+    "properties": {
+        "rules_service_approved": {"type": "boolean"},
+        "user_approved": {"type": "boolean"},
+    },
+    "required": [
+        "rules_service_approved",
+        "user_approved",
+    ],
+    "additionalProperties": False
+}
 
 class RegistrationSerializer(serializers.ModelSerializer):
+    approved_by = serializers.ReadOnlyField(source='approved_by.username')
     class Meta:
         model = Registration
         fields = '__all__'
@@ -177,7 +194,28 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         errors = [e.message for e in
-                  Draft7Validator(SCHEMA).iter_errors(data['latest_data'])]
+                  Draft7Validator(REGISTRATION_SCHEMA).iter_errors(data['latest_data'])]
+        if errors:
+            raise serializers.ValidationError(f"Validation failed: {errors}")
+        return data
+
+
+class RegistrationStatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Registration
+        fields = '__all__'
+
+    def update(self, instance, validated_data):
+        instance.rules_service_approved = validated_data['rules_service_approved']
+        instance.user_approved = validated_data['user_approved']
+        instance.approved_by = validated_data['approved_by']
+        instance.approved_at = timezone.now()
+        instance.save()
+        return instance
+
+    def validate(self, data):
+        errors = [e.message for e in
+                  Draft7Validator(REGISTRATION_STATUS_SCHEMA).iter_errors(data)]
         if errors:
             raise serializers.ValidationError(f"Validation failed: {errors}")
         return data

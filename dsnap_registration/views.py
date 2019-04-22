@@ -1,13 +1,21 @@
 from rest_framework import generics
+from rest_framework.permissions import (SAFE_METHODS, BasePermission,
+                                        IsAuthenticated)
 
 from .models import Registration
-from .serializers import RegistrationSerializer
+from .serializers import RegistrationSerializer, RegistrationStatusSerializer
 
 REGISTRATION_SEARCH_PARAMS = ('state_id',)
 REGISTRANT_SEARCH_PARAMS = ('ssn', 'dob', 'last_name',)
 
 
+class AnonymousPost(BasePermission):
+    def has_permission(self, request, view):
+        return request.method == 'POST'
+
+
 class RegistrationList(generics.ListCreateAPIView):
+    permission_classes = (IsAuthenticated | AnonymousPost,)
     serializer_class = RegistrationSerializer
 
     def get_queryset(self):
@@ -33,5 +41,21 @@ class RegistrationList(generics.ListCreateAPIView):
 
 
 class RegistrationDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticated,)
     queryset = Registration.objects.all()
     serializer_class = RegistrationSerializer
+
+    def perform_update(self, serializer):
+        serializer.save(modified_by=self.request.user)
+
+class RegistrationStatusUpdate(generics.UpdateAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = Registration.objects.all()
+    serializer_class = RegistrationStatusSerializer
+
+    def update(self, request, *args, **kwargs):
+        kwargs['partial'] = True
+        return super().update(request, *args, **kwargs)
+
+    def perform_update(self, serializer):
+        serializer.save(approved_by=self.request.user)
