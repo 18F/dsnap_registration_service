@@ -66,10 +66,11 @@ This will make the application available at `http://localhost:8000`, by default.
 
 ## Endpoints
 
-| URL               | Verb     | Description
-|-------------------|----------|--------------------|
-| /registrations    | POST     | The endpoint for submitting new registrations to be persisted. Returns the id of the new registration                        |
-| /registrations    | GET      | Returns registrations. Allows query string params `state_id`, `registrant_ssn`, `registrant_dob`, `registrant_last_name`. Allows pagination with `limit` and `offset` query string params. |
-| /registrations/id | GET      | Returns the specified registration                                                                                           |
-| /registrations/id | PUT      | Updates the specified registration                                                                                           |
-| /registrations/id | DELETE   | Deletes the specified registration                                                                                           |
+| URL                      | Verb     | Authentication   | Description                                                                                                 |
+|--------------------------|----------|:----------------:|-------------------------------------------------------------------------------------------------------------|
+| /registrations           | POST     |                  | The endpoint for submitting new registrations to be persisted. Returns the id of the new registration       |
+| /registrations           | GET      |:white_check_mark:| Returns registrations. Allows query string params `state_id`, `registrant_ssn`, `registrant_dob`, `registrant_last_name`. Allows pagination with `limit` and `offset` query string params. |
+| /registrations/id        | GET      |:white_check_mark:| Returns the specified registration                                                                                           |
+| /registrations/id        | PUT      |:white_check_mark:|Updates the specified registration                                                                                           |
+| /registrations/id        | DELETE   |:white_check_mark:| Deletes the specified registration                                                                                           |
+| /registrations/id/status | PUT      |:white_check_mark:| Allows an authorized user to approve/deny the application
