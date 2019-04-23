@@ -219,7 +219,7 @@ def test_search_by_non_registrant_ssn(authenticated_client, payload1):
 
 @pytest.mark.django_db
 def test_search_by_registrant_last_name(authenticated_client, payload1, payload2):
-    search_url = '/registrations?registrant_last_name={}'.format("Doe")
+    search_url = '/registrations?registrant_last_name={}'.format("doe")
     response = authenticated_client.get(search_url)
     assert response.status_code == status.HTTP_200_OK
     result = response.json()
