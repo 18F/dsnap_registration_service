@@ -35,6 +35,7 @@ CORS_ORIGIN_REGEX_WHITELIST = (
     r'^https?://dsnap-registration.*\.app\.cloud\.gov$'
 )
 
+CORS_ALLOW_CREDENTIALS = True
 
 # Application definition
 
