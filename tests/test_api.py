@@ -90,20 +90,20 @@ def test_authentication(client):
 
     response = client.get(f'/registrations/{registration_id}',
                           content_type="application/json")
-    assert response.status_code == status.HTTP_403_FORBIDDEN
+    assert response.status_code in (status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN)
 
     payload["preferred_language"] = "es"
     response = client.put(f'/registrations/{registration_id}', data=payload,
                           content_type="application/json")
-    assert response.status_code == status.HTTP_403_FORBIDDEN
+    assert response.status_code in (status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN)
 
     response = client.delete(f'/registrations/{registration_id}',
                              content_type="application/json")
-    assert response.status_code == status.HTTP_403_FORBIDDEN
+    assert response.status_code in (status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN)
 
     response = client.put(f'/registrations/{registration_id}/status',
                              content_type="application/json")
-    assert response.status_code == status.HTTP_403_FORBIDDEN
+    assert response.status_code in (status.HTTP_401_UNAUTHORIZED, status.HTTP_403_FORBIDDEN)
 
 
 @pytest.mark.django_db
